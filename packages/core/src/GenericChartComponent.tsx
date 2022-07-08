@@ -1,5 +1,3 @@
-import * as PropTypes from "prop-types";
-
 import { GenericComponent } from "./GenericComponent";
 import { isDefined } from "./utils";
 
@@ -7,30 +5,6 @@ const ALWAYS_TRUE_TYPES = ["drag", "dragend"];
 
 export class GenericChartComponent extends GenericComponent {
     public static defaultProps = GenericComponent.defaultProps;
-
-    public static contextTypes = {
-        width: PropTypes.number.isRequired,
-        height: PropTypes.number.isRequired,
-        margin: PropTypes.object.isRequired,
-        chartId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-        getCanvasContexts: PropTypes.func,
-        xScale: PropTypes.func.isRequired,
-        xAccessor: PropTypes.func.isRequired,
-        displayXAccessor: PropTypes.func.isRequired,
-        plotData: PropTypes.array.isRequired,
-        fullData: PropTypes.array.isRequired,
-        chartConfig: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
-        morePropsDecorator: PropTypes.func,
-        generateSubscriptionId: PropTypes.func,
-        getMutableState: PropTypes.func.isRequired,
-        amIOnTop: PropTypes.func.isRequired,
-        subscribe: PropTypes.func.isRequired,
-        unsubscribe: PropTypes.func.isRequired,
-        setCursorClass: PropTypes.func.isRequired,
-        canvasOriginX: PropTypes.number,
-        canvasOriginY: PropTypes.number,
-        ratio: PropTypes.number.isRequired,
-    };
 
     public constructor(props: any, context: any) {
         super(props, context);
