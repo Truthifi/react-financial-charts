@@ -64,27 +64,6 @@ export class GenericComponent extends React.Component<GenericComponentProps, Gen
         enableDragOnHover: false,
     };
 
-    // public static contextTypes = {
-    //     width: PropTypes.number.isRequired,
-    //     height: PropTypes.number.isRequired,
-    //     margin: PropTypes.object.isRequired,
-    //     chartId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-    //     getCanvasContexts: PropTypes.func,
-    //     xScale: PropTypes.func.isRequired,
-    //     xAccessor: PropTypes.func.isRequired,
-    //     displayXAccessor: PropTypes.func.isRequired,
-    //     plotData: PropTypes.array.isRequired,
-    //     fullData: PropTypes.array.isRequired,
-    //     chartConfig: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
-    //     morePropsDecorator: PropTypes.func,
-    //     generateSubscriptionId: PropTypes.func,
-    //     getMutableState: PropTypes.func.isRequired,
-    //     amIOnTop: PropTypes.func.isRequired,
-    //     subscribe: PropTypes.func.isRequired,
-    //     unsubscribe: PropTypes.func.isRequired,
-    //     setCursorClass: PropTypes.func.isRequired,
-    // };
-
     public moreProps: any = {};
 
     private dragInProgress = false;

@@ -94,7 +94,7 @@ export function getNewChartConfig(innerDimension: any, children: any, existingCh
             origin,
             padding,
             yExtents: yExtentsProp,
-            yScale: yScaleProp,
+            yScale: yScaleProp = ChartDefaultConfig.yScale,
             flipYScale,
             yExtentsCalculator,
         } = chartProps;

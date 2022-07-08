@@ -1,10 +1,12 @@
 import { GenericComponent } from "./GenericComponent";
 import { isDefined } from "./utils";
+import { ChartContext } from "./Chart";
 
 const ALWAYS_TRUE_TYPES = ["drag", "dragend"];
 
 export class GenericChartComponent extends GenericComponent {
     public static defaultProps = GenericComponent.defaultProps;
+    public static contextType = ChartContext;
 
     public constructor(props: any, context: any) {
         super(props, context);

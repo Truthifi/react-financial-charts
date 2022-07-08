@@ -1,13 +1,13 @@
 import { ScaleContinuousNumeric, scaleLinear } from "d3-scale";
 import * as React from "react";
-import { ChartCanvasContext } from "./ChartCanvas";
+import { ChartCanvasContext, chartCanvasContextDefaultValue, ChartCanvasContextType } from "./ChartCanvas";
 import { ChartConfig } from "./utils/ChartDataUtil";
 
-export type ChartContextType = {
+export type ChartContextType = Omit<ChartCanvasContextType<number | Date>, "chartConfig"> & {
     chartConfig: ChartConfig;
-    chartId: number | string;
 };
 export const ChartContext = React.createContext<ChartContextType>({
+    ...chartCanvasContextDefaultValue,
     // @ts-ignore
     chartConfig: {},
     chartId: 0,
@@ -47,7 +47,8 @@ export const Chart = React.memo((props: React.PropsWithChildren<ChartProps>) => 
         onDoubleClick,
     } = props;
 
-    const { subscribe, unsubscribe, chartConfig } = React.useContext(ChartCanvasContext);
+    const chartCanvasContextValue = React.useContext(ChartCanvasContext);
+    const { subscribe, unsubscribe, chartConfig } = chartCanvasContextValue;
 
     const listener = React.useCallback(
         (type: string, moreProps: any, _: any, e: React.MouseEvent) => {
@@ -91,10 +92,11 @@ export const Chart = React.memo((props: React.PropsWithChildren<ChartProps>) => 
     const config = chartConfig.find(({ id }) => id === props.id)!;
     const contextValue = React.useMemo(() => {
         return {
+            ...chartCanvasContextValue,
             chartId: id,
             chartConfig: config,
         };
-    }, [id, config]);
+    }, [id, config, chartCanvasContextValue]);
 
     const {
         origin: [x, y],

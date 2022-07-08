@@ -67,7 +67,7 @@ const getCursorStyle = () => {
     return <style type="text/css">{tooltipStyle}</style>;
 };
 
-export type ChartCanvasContextType<TXAxis extends number | Date> = {
+export interface ChartCanvasContextType<TXAxis extends number | Date> {
     width: number;
     height: number;
     margin: {};
@@ -75,7 +75,7 @@ export type ChartCanvasContextType<TXAxis extends number | Date> = {
     getCanvasContexts?: () => void;
     xScale: Function;
     // Not sure if it should be optional
-    xAccessor?: (data: any) => TXAxis;
+    xAccessor: (data: any) => TXAxis;
     displayXAccessor: (data: any) => TXAxis;
     plotData: any[];
     fullData: any[];
@@ -87,55 +87,11 @@ export type ChartCanvasContextType<TXAxis extends number | Date> = {
     subscribe: (id: string, rest: any) => void;
     unsubscribe: (id: string) => void;
     setCursorClass: (className: string) => void;
-};
-
-/*
-  plotData: PropTypes.array,
-    fullData: PropTypes.array,
-    chartConfig: PropTypes.arrayOf(
-    PropTypes.shape({
-        id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
-        origin: PropTypes.arrayOf(PropTypes.number).isRequired,
-        padding: PropTypes.oneOfType([
-            PropTypes.number,
-            PropTypes.shape({
-                top: PropTypes.number,
-                bottom: PropTypes.number,
-            }),
-        ]),
-        yExtents: PropTypes.arrayOf(PropTypes.func),
-        yExtentsProvider: PropTypes.func,
-        yScale: PropTypes.func.isRequired,
-        mouseCoordinates: PropTypes.shape({
-            at: PropTypes.string,
-            format: PropTypes.func,
-        }),
-        width: PropTypes.number.isRequired,
-        height: PropTypes.number.isRequired,
-    }),
-).isRequired,
-    xScale: PropTypes.func.isRequired,
-    xAccessor: PropTypes.func.isRequired,
-    displayXAccessor: PropTypes.func.isRequired,
-    width: PropTypes.number.isRequired,
-    height: PropTypes.number.isRequired,
-    margin: PropTypes.object.isRequired,
-    ratio: PropTypes.number.isRequired,
-    getCanvasContexts: PropTypes.func,
-    xAxisZoom: PropTypes.func,
-    yAxisZoom: PropTypes.func,
-    amIOnTop: PropTypes.func,
-    redraw: PropTypes.func,
-    subscribe: PropTypes.func,
-    unsubscribe: PropTypes.func,
-    setCursorClass: PropTypes.func,
-    generateSubscriptionId: PropTypes.func,
-    getMutableState: PropTypes.func,
-*/
+}
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 const noop = () => {};
-export const ChartCanvasContext = React.createContext<ChartCanvasContextType<number | Date>>({
+export const chartCanvasContextDefaultValue: ChartCanvasContextType<number | Date> = {
     amIOnTop: () => false,
     chartConfig: [],
     chartId: 0,
@@ -151,7 +107,10 @@ export const ChartCanvasContext = React.createContext<ChartCanvasContextType<num
     width: 0,
     xAccessor: () => 0,
     xScale: noop,
-});
+};
+export const ChartCanvasContext = React.createContext<ChartCanvasContextType<number | Date>>(
+    chartCanvasContextDefaultValue,
+);
 
 const getDimensions = <TXAxis extends number | Date>(props: ChartCanvasProps<TXAxis>) => {
     const { margin, height, width } = props;
@@ -429,7 +388,7 @@ export interface ChartCanvasProps<TXAxis extends number | Date> {
 }
 
 interface ChartCanvasState<TXAxis extends number | Date> {
-    xAccessor?: (data: any) => TXAxis;
+    xAccessor: (data: any) => TXAxis;
     displayXAccessor?: any;
     filterData?: any;
     chartConfig: ChartConfig[];
@@ -677,6 +636,7 @@ export class ChartCanvas<TXAxis extends number | Date> extends React.Component<
             plotData,
             mouseXY,
             currentItem,
+            xAccessor,
         };
     };
 

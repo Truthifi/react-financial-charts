@@ -66,11 +66,7 @@ export class YAxis extends React.Component<YAxisProps> {
         zoomCursorClassName: "react-financial-charts-ns-resize-cursor",
     };
 
-    // public static contextTypes = {
-    //     yAxisZoom: PropTypes.func.isRequired,
-    //     chartId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
-    //     chartConfig: PropTypes.object.isRequired,
-    // };
+    public static contextType = ChartContext;
 
     public render() {
         const {
@@ -163,5 +159,3 @@ export class YAxis extends React.Component<YAxisProps> {
         return scale;
     };
 }
-
-YAxis.contextType = ChartContext;
