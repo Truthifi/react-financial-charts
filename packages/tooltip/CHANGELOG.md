@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/reactivemarkets/react-financial-charts/compare/v1.3.2...v1.4.0) (2022-07-12)
+
+
+### Features
+
+* Eliminated unsafe lifecycle methods, rewrote GenericComponent and GenericChartComponent ([7efde4e](https://github.com/reactivemarkets/react-financial-charts/commit/7efde4e3726477f61efdb851e6126f91e0567c88))
+* Migrated to new React context API ([c260bd5](https://github.com/reactivemarkets/react-financial-charts/commit/c260bd54b83c9064ffd3acbe1a59c3ab19e504c8))
+
+
+
+
+
 ## [1.3.1](https://github.com/reactivemarkets/react-financial-charts/compare/v1.3.0...v1.3.1) (2021-06-16)
 
 **Note:** Version bump only for package @react-financial-charts/tooltip

@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/reactivemarkets/react-financial-charts/compare/v1.3.2...v1.4.0) (2022-07-12)
+
+
+### Bug Fixes
+
+* ChartCanvas no longer uses UNSAFE_componentWillReceiveProps ([9277f58](https://github.com/reactivemarkets/react-financial-charts/commit/9277f5832a6e95219fd0c6c9fd1ac72f85c521dd))
+* Fixed warning from React about using getSnapshotBeforeUpdate without componentDidUpdate ([66158dc](https://github.com/reactivemarkets/react-financial-charts/commit/66158dcd0e39016d353f3b08da2da0efc8f3548b))
+
+
+### Features
+
+* Eliminated unsafe lifecycle methods, rewrote GenericComponent and GenericChartComponent ([7efde4e](https://github.com/reactivemarkets/react-financial-charts/commit/7efde4e3726477f61efdb851e6126f91e0567c88))
+* Migrated to new React context API ([c260bd5](https://github.com/reactivemarkets/react-financial-charts/commit/c260bd54b83c9064ffd3acbe1a59c3ab19e504c8))
+
+
+
+
+
 ## [1.3.1](https://github.com/reactivemarkets/react-financial-charts/compare/v1.3.0...v1.3.1) (2021-06-16)
 
 
