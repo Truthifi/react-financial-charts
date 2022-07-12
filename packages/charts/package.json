@@ -35,16 +35,16 @@
     "compile": "tsc -p tsconfig.json"
   },
   "dependencies": {
-    "@react-financial-charts/annotations": "file:../annotations",
-    "@react-financial-charts/axes": "file:../axes",
-    "@react-financial-charts/coordinates": "file:../coordinates",
-    "@react-financial-charts/core": "file:../core",
-    "@react-financial-charts/indicators": "file:../indicators",
-    "@react-financial-charts/interactive": "file:../interactive",
-    "@react-financial-charts/scales": "file:../scales",
-    "@react-financial-charts/series": "file:../series",
-    "@react-financial-charts/tooltip": "file:../tooltip",
-    "@react-financial-charts/utils": "file:../utils"
+    "@truthifi/react-financial-charts-annotations": "file:../annotations",
+    "@truthifi/react-financial-charts-axes": "file:../axes",
+    "@truthifi/react-financial-charts-coordinates": "file:../coordinates",
+    "@truthifi/react-financial-charts-core": "file:../core",
+    "@truthifi/react-financial-charts-indicators": "file:../indicators",
+    "@truthifi/react-financial-charts-interactive": "file:../interactive",
+    "@truthifi/react-financial-charts-scales": "file:../scales",
+    "@truthifi/react-financial-charts-series": "file:../series",
+    "@truthifi/react-financial-charts-tooltip": "file:../tooltip",
+    "@truthifi/react-financial-charts-utils": "file:../utils"
   },
   "peerDependencies": {
     "react": "^16.0.0 || ^17.0.0",

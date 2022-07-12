@@ -1,10 +1,10 @@
 import * as React from "react";
-import { Chart, ChartCanvas } from "@react-financial-charts/core";
-import { XAxis, YAxis } from "@react-financial-charts/axes";
-import { discontinuousTimeScaleProviderBuilder } from "@react-financial-charts/scales";
-import { BarSeries, BarSeriesProps } from "@react-financial-charts/series";
+import { Chart, ChartCanvas } from "@truthifi/react-financial-charts-core";
+import { XAxis, YAxis } from "@truthifi/react-financial-charts-axes";
+import { discontinuousTimeScaleProviderBuilder } from "@truthifi/react-financial-charts-scales";
+import { BarSeries, BarSeriesProps } from "@truthifi/react-financial-charts-series";
 import { IOHLCData, withOHLCData } from "../../data";
-import { withDeviceRatio, withSize } from "@react-financial-charts/utils";
+import { withDeviceRatio, withSize } from "@truthifi/react-financial-charts-utils";
 
 interface ChartProps extends Partial<BarSeriesProps> {
     readonly data: IOHLCData[];

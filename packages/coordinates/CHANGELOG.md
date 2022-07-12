@@ -16,7 +16,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## [1.3.1](https://github.com/reactivemarkets/react-financial-charts/compare/v1.3.0...v1.3.1) (2021-06-16)
 
-**Note:** Version bump only for package @react-financial-charts/coordinates
+**Note:** Version bump only for package @truthifi/react-financial-charts-coordinates
 
 
 
@@ -46,7 +46,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## [1.0.1](https://github.com/reactivemarkets/react-financial-charts/compare/v1.0.0...v1.0.1) (2021-01-01)
 
-**Note:** Version bump only for package @react-financial-charts/coordinates
+**Note:** Version bump only for package @truthifi/react-financial-charts-coordinates
 
 
 
@@ -87,7 +87,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 # [1.0.0-alpha.14](https://github.com/reactivemarkets/react-financial-charts/compare/v1.0.0-alpha.13...v1.0.0-alpha.14) (2020-09-02)
 
-**Note:** Version bump only for package @react-financial-charts/coordinates
+**Note:** Version bump only for package @truthifi/react-financial-charts-coordinates
 
 
 
@@ -172,7 +172,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 # [1.0.0-alpha.1](https://github.com/reactivemarkets/react-financial-charts/compare/v1.0.0-alpha.0...v1.0.0-alpha.1) (2020-07-10)
 
-**Note:** Version bump only for package @react-financial-charts/coordinates
+**Note:** Version bump only for package @truthifi/react-financial-charts-coordinates
 
 
 

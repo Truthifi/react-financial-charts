@@ -1,5 +1,5 @@
 # Tooltip
 
 ```bash
-npm i @react-financial-charts/tooltip
+npm i @truthifi/react-financial-charts-tooltip
 ```

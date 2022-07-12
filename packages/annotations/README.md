@@ -1,5 +1,5 @@
 # Annotations
 
 ```bash
-npm i @react-financial-charts/annotations
+npm i @truthifi/react-financial-charts-annotations
 ```

@@ -1,5 +1,5 @@
 {
-  "name": "@react-financial-charts/core",
+  "name": "@truthifi/react-financial-charts-core",
   "version": "1.4.0",
   "description": "Core code for react-financial-charts",
   "publishConfig": {

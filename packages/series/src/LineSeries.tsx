@@ -5,7 +5,7 @@ import {
     getAxisCanvas,
     getMouseCanvas,
     GenericChartComponent,
-} from "@react-financial-charts/core";
+} from "@truthifi/react-financial-charts-core";
 import { line, CurveFactoryLineOnly, CurveFactory } from "d3-shape";
 import * as React from "react";
 

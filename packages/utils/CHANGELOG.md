@@ -93,7 +93,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 # [1.0.0-alpha.1](https://github.com/reactivemarkets/react-financial-charts/compare/v1.0.0-alpha.0...v1.0.0-alpha.1) (2020-07-10)
 
-**Note:** Version bump only for package @react-financial-charts/utils
+**Note:** Version bump only for package @truthifi/react-financial-charts-utils
 
 
 

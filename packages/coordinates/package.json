@@ -1,5 +1,5 @@
 {
-  "name": "@react-financial-charts/coordinates",
+  "name": "@truthifi/react-financial-charts-coordinates",
   "version": "1.4.0",
   "description": "Coordinates for react-financial-charts",
   "publishConfig": {
@@ -39,7 +39,7 @@
     "watch": "tsc -p tsconfig.json --watch --preserveWatchOutput"
   },
   "dependencies": {
-    "@react-financial-charts/core": "file:../core",
+    "@truthifi/react-financial-charts-core": "file:../core",
     "d3-format": "^2.0.0",
     "prop-types": "^15.7.2"
   },

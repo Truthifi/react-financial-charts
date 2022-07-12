@@ -1,5 +1,5 @@
 {
-  "name": "@react-financial-charts/utils",
+  "name": "@truthifi/react-financial-charts-utils",
   "version": "1.3.0",
   "description": "Utils for react-financial-charts",
   "publishConfig": {
