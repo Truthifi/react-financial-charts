@@ -84,30 +84,33 @@ export const GenericChartComponent = React.memo(
             return true;
         }, []);
 
-        const updateMoreProps = useCallback((newMoreProps: MoreProps | undefined, moreProps: MoreProps) => {
-            const { chartConfigs: chartConfigList } = newMoreProps || moreProps;
-            if (chartConfigList && Array.isArray(chartConfigList)) {
-                const { chartId } = context;
-                moreProps.chartConfig = chartConfigList.find((each) => each.id === chartId);
-            }
-            if (isDefined(moreProps.chartConfig)) {
-                const {
-                    origin: [ox, oy],
-                } = moreProps.chartConfig;
-                if (isDefined(moreProps.mouseXY)) {
-                    const {
-                        mouseXY: [x, y],
-                    } = moreProps;
-                    moreProps.mouseXY = [x - ox, y - oy];
+        const updateMoreProps = useCallback(
+            (newMoreProps: MoreProps | undefined, moreProps: MoreProps) => {
+                const { chartConfigs: chartConfigList } = newMoreProps || moreProps;
+                if (chartConfigList && Array.isArray(chartConfigList)) {
+                    const { chartId } = context;
+                    moreProps.chartConfig = chartConfigList.find((each) => each.id === chartId);
                 }
-                if (isDefined(moreProps.startPos)) {
+                if (isDefined(moreProps.chartConfig)) {
                     const {
-                        startPos: [x, y],
-                    } = moreProps;
-                    moreProps.startPos = [x - ox, y - oy];
+                        origin: [ox, oy],
+                    } = moreProps.chartConfig;
+                    if (isDefined(moreProps.mouseXY)) {
+                        const {
+                            mouseXY: [x, y],
+                        } = moreProps;
+                        moreProps.mouseXY = [x - ox, y - oy];
+                    }
+                    if (isDefined(moreProps.startPos)) {
+                        const {
+                            startPos: [x, y],
+                        } = moreProps;
+                        moreProps.startPos = [x - ox, y - oy];
+                    }
                 }
-            }
-        }, []);
+            },
+            [context.chartId],
+        );
 
         return (
             <GenericComponent

@@ -102,13 +102,6 @@ export const GenericComponent = React.memo(
             plotData: context.plotData,
             xScale: context.xScale,
         });
-        Object.assign(moreProps.current, {
-            chartId: context.chartId,
-            chartConfigs: context.chartConfigs,
-            fullData: context.fullData,
-            plotData: context.plotData,
-            xScale: context.xScale,
-        });
         const dragInProgressRef = useRef(false);
         const evaluationInProgressRef = useRef(false);
         const iSetTheCursorClassRef = useRef(false);

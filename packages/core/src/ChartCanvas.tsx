@@ -974,34 +974,35 @@ export class ChartCanvas<TXAxis extends number | Date> extends React.Component<
         chartsToPan: string[],
         e: React.MouseEvent,
     ) => {
-        if (!this.waitingForPanAnimationFrame) {
-            this.waitingForPanAnimationFrame = true;
-
-            this.hackyWayToStopPanBeyondBounds__plotData =
-                this.hackyWayToStopPanBeyondBounds__plotData ?? this.state.plotData;
-            this.hackyWayToStopPanBeyondBounds__domain =
-                this.hackyWayToStopPanBeyondBounds__domain ?? this.state.xScale!.domain();
-
-            const newState = this.panHelper(mousePosition, panStartXScale, dxdy, chartsToPan);
-
-            this.hackyWayToStopPanBeyondBounds__plotData = newState.plotData;
-            this.hackyWayToStopPanBeyondBounds__domain = newState.xScale.domain();
-
-            this.panInProgress = true;
-
-            this.triggerEvent("pan", newState, e);
-
-            this.mutableState = {
-                mouseXY: newState.mouseXY,
-                currentItem: newState.currentItem,
-                currentCharts: newState.currentCharts,
-            };
-            requestAnimationFrame(() => {
-                this.waitingForPanAnimationFrame = false;
-                this.clearBothCanvas();
-                this.draw({ trigger: "pan" });
-            });
+        if (this.waitingForPanAnimationFrame) {
+            return;
         }
+        this.waitingForPanAnimationFrame = true;
+
+        this.hackyWayToStopPanBeyondBounds__plotData =
+            this.hackyWayToStopPanBeyondBounds__plotData ?? this.state.plotData;
+        this.hackyWayToStopPanBeyondBounds__domain =
+            this.hackyWayToStopPanBeyondBounds__domain ?? this.state.xScale!.domain();
+
+        const newState = this.panHelper(mousePosition, panStartXScale, dxdy, chartsToPan);
+
+        this.hackyWayToStopPanBeyondBounds__plotData = newState.plotData;
+        this.hackyWayToStopPanBeyondBounds__domain = newState.xScale.domain();
+
+        this.panInProgress = true;
+
+        this.triggerEvent("pan", newState, e);
+
+        this.mutableState = {
+            mouseXY: newState.mouseXY,
+            currentItem: newState.currentItem,
+            currentCharts: newState.currentCharts,
+        };
+        requestAnimationFrame(() => {
+            this.waitingForPanAnimationFrame = false;
+            this.clearBothCanvas();
+            this.draw({ trigger: "pan" });
+        });
     };
 
     public handlePanEnd = (
@@ -1073,39 +1074,36 @@ export class ChartCanvas<TXAxis extends number | Date> extends React.Component<
     };
 
     public handleMouseMove = (mouseXY: [number, number], _: string, e: any) => {
-        if (!this.waitingForMouseMoveAnimationFrame) {
-            this.waitingForMouseMoveAnimationFrame = true;
-
-            const { chartConfigs, plotData, xScale, xAccessor } = this.state;
-
-            const currentCharts = getCurrentCharts(chartConfigs, mouseXY);
-            const currentItem = getCurrentItem(xScale, xAccessor, mouseXY, plotData);
-            this.triggerEvent(
-                "mousemove",
-                {
-                    show: true,
-                    mouseXY,
-                    // prevMouseXY is used in interactive components
-                    prevMouseXY: this.prevMouseXY,
-                    currentItem,
-                    currentCharts,
-                },
-                e,
-            );
-
-            this.prevMouseXY = mouseXY;
-            this.mutableState = {
+        if (this.waitingForMouseMoveAnimationFrame) {
+            return;
+        }
+        this.waitingForMouseMoveAnimationFrame = true;
+        const { chartConfigs, plotData, xScale, xAccessor } = this.state;
+        const currentCharts = getCurrentCharts(chartConfigs, mouseXY);
+        const currentItem = getCurrentItem(xScale, xAccessor, mouseXY, plotData);
+        this.triggerEvent(
+            "mousemove",
+            {
+                show: true,
                 mouseXY,
+                // prevMouseXY is used in interactive components
+                prevMouseXY: this.prevMouseXY,
                 currentItem,
                 currentCharts,
-            };
-
-            requestAnimationFrame(() => {
-                this.clearMouseCanvas();
-                this.draw({ trigger: "mousemove" });
-                this.waitingForMouseMoveAnimationFrame = false;
-            });
-        }
+            },
+            e,
+        );
+        this.prevMouseXY = mouseXY;
+        this.mutableState = {
+            mouseXY,
+            currentItem,
+            currentCharts,
+        };
+        requestAnimationFrame(() => {
+            this.clearMouseCanvas();
+            this.draw({ trigger: "mousemove" });
+            this.waitingForMouseMoveAnimationFrame = false;
+        });
     };
 
     public handleMouseLeave = (e: any) => {
