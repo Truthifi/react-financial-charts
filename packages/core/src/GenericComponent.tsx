@@ -13,6 +13,7 @@ import { ICanvasContexts } from "./CanvasContainer";
 import { ChartCanvasContext } from "./ChartCanvas";
 import { useEvent } from "./useEvent";
 import { ChartConfig } from "./utils/ChartDataUtil";
+import { ChartContext } from "./Chart";
 
 const aliases: Record<string, string> = {
     mouseleave: "mousemove", // to draw interactive after mouse exit
@@ -72,6 +73,8 @@ export interface MoreProps {
     chartConfigs: ChartConfig[];
     chartConfig?: ChartConfig;
     fullData: any[];
+    plotData: any[];
+    xScale: Function;
 }
 
 export interface GenericComponentRef {
@@ -81,16 +84,30 @@ export interface GenericComponentRef {
 export const GenericComponent = React.memo(
     React.forwardRef((props: GenericComponentProps, ref: ForwardedRef<GenericComponentRef>) => {
         const context = useContext(ChartCanvasContext);
+        const { chartId } = useContext(ChartContext);
         const subscriberId = useMemo(() => context.generateSubscriptionId?.() || 0, []);
         const [, setUpdateCount] = useState(0);
-        const { subscribe, unsubscribe, chartId } = context;
-        const { clip = true, edgeClip = false } = props;
+        const { subscribe, unsubscribe } = context;
+        const {
+            clip = true,
+            edgeClip = false,
+            canvasToDraw = (contexts: ICanvasContexts) => contexts.mouseCoord,
+        } = props;
         const moreProps = React.useRef<MoreProps>({
             chartId: context.chartId,
             hovering: false,
             currentCharts: [],
             chartConfigs: context.chartConfigs,
             fullData: context.fullData,
+            plotData: context.plotData,
+            xScale: context.xScale,
+        });
+        Object.assign(moreProps.current, {
+            chartId: context.chartId,
+            chartConfigs: context.chartConfigs,
+            fullData: context.fullData,
+            plotData: context.plotData,
+            xScale: context.xScale,
         });
         const dragInProgressRef = useRef(false);
         const evaluationInProgressRef = useRef(false);
@@ -102,30 +119,19 @@ export const GenericComponent = React.memo(
         }, []);
 
         const getMoreProps = useCallback(() => {
-            const {
-                xScale,
-                plotData,
-                chartConfigs,
-                xAccessor,
-                displayXAccessor,
-                width,
-                height,
-                chartId,
-                fullData,
-            } = context;
+            const { chartConfigs, xAccessor, displayXAccessor, width, height, fullData } = context;
+
+            const otherMoreProps = props.getMoreProps?.(moreProps.current);
 
             return {
-                xScale,
-                plotData,
                 xAccessor,
                 displayXAccessor,
                 width,
                 height,
                 ...moreProps.current,
-                chartId,
                 fullData,
                 chartConfigs,
-                ...props.getMoreProps?.(moreProps.current),
+                ...otherMoreProps,
             };
         }, [context, props.getMoreProps]);
 
@@ -324,7 +330,7 @@ export const GenericComponent = React.memo(
         });
 
         const drawOnCanvas = useCallback(() => {
-            const { canvasDraw, canvasToDraw } = props;
+            const { canvasDraw } = props;
             if (canvasDraw === undefined || canvasToDraw === undefined) {
                 return;
             }
@@ -343,42 +349,31 @@ export const GenericComponent = React.memo(
                 canvasDraw(ctx, moreProps);
                 postCanvasDraw(ctx, moreProps);
             }
-        }, [
-            props.canvasToDraw,
-            props.canvasDraw,
-            context.getCanvasContexts,
-            preCanvasDraw,
-            postCanvasDraw,
-            getMoreProps,
-        ]);
+        }, [canvasToDraw, props.canvasDraw, context.getCanvasContexts, preCanvasDraw, postCanvasDraw, getMoreProps]);
 
-        const draw = useCallback(
-            ({ trigger, force = false }: { force: boolean; trigger: string }) => {
-                const type = aliases[trigger] || trigger;
-                const proceed = props.drawOn.indexOf(type) > -1;
+        const draw = useEvent(({ trigger, force = false }: { force: boolean; trigger: string }) => {
+            const type = aliases[trigger] || trigger;
+            const proceed = props.drawOn.indexOf(type) > -1;
 
-                if (proceed || props.selected /* this is to draw as soon as you select */ || force) {
-                    // console.log("Drawing");
-                    const { canvasDraw } = props;
-                    if (canvasDraw === undefined) {
-                        setUpdateCount((u) => u + 1);
-                    } else {
-                        drawOnCanvas();
-                    }
+            if (proceed || props.selected /* this is to draw as soon as you select */ || force) {
+                const { canvasDraw } = props;
+                if (canvasDraw === undefined) {
+                    setUpdateCount((u) => u + 1);
+                } else {
+                    drawOnCanvas();
                 }
-            },
-            [props.drawOn, props.selected, props.canvasDraw, drawOnCanvas],
-        );
-        const getPanConditions = useCallback(() => {
+            }
+        });
+        const getPanConditions = useEvent(() => {
             const draggable =
-                !!(props.selected && moreProps.current.hovering) ||
+                (props.selected && moreProps.current.hovering) ||
                 (props.enableDragOnHover && moreProps.current.hovering);
 
             return {
-                draggable,
+                draggable: !!draggable,
                 panEnabled: !props.disablePan,
             };
-        }, []);
+        });
 
         useEffect(() => {
             const { setCursorClass } = context;
@@ -413,7 +408,7 @@ export const GenericComponent = React.memo(
                     context.setCursorClass(null);
                 }
             };
-        }, []);
+        }, [chartId, subscriberId, edgeClip, clip]);
 
         const { canvasDraw, svgDraw } = props;
         if (canvasDraw !== undefined || svgDraw === undefined) {

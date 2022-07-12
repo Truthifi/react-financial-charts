@@ -261,7 +261,7 @@ const updateChart = (
 };
 
 const calculateState = <TXAxis extends number | Date>(props: ChartCanvasProps<TXAxis>) => {
-    const { xAccessor: inputXAccesor, xExtents: xExtentsProp, data, padding, flipXScale } = props;
+    const { xAccessor: inputXAccessor, xExtents: xExtentsProp, data, padding, flipXScale } = props;
 
     const direction = getXScaleDirection(flipXScale);
 
@@ -271,14 +271,14 @@ const calculateState = <TXAxis extends number | Date>(props: ChartCanvasProps<TX
         typeof xExtentsProp === "function"
             ? xExtentsProp(data)
             : (d3Extent<number | Date>(
-                  xExtentsProp.map((d: any) => functor(d)).map((each: any) => each(data, inputXAccesor)),
+                  xExtentsProp.map((d: any) => functor(d)).map((each: any) => each(data, inputXAccessor)),
               ) as [TXAxis, TXAxis]);
 
     const { xAccessor, displayXAccessor, xScale, fullData, filterData } = calculateFullData(props);
 
     const updatedXScale = setXRange(xScale, dimensions, padding, direction);
 
-    const { plotData, domain } = filterData(fullData, extent, inputXAccesor, updatedXScale);
+    const { plotData, domain } = filterData(fullData, extent, inputXAccessor, updatedXScale);
 
     return {
         plotData,

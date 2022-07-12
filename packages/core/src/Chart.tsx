@@ -104,7 +104,9 @@ export const Chart = React.memo((props: React.PropsWithChildren<ChartProps>) => 
 
     return (
         <ChartContext.Provider value={contextValue}>
-            <g transform={`translate(${x}, ${y})`}>{props.children}</g>
+            <g transform={`translate(${x}, ${y})`} id={`chart_${id}`}>
+                {props.children}
+            </g>
         </ChartContext.Provider>
     );
 });

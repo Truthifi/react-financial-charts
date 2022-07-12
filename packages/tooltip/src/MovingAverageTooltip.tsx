@@ -117,7 +117,7 @@ export class MovingAverageTooltip extends React.Component<MovingAverageTooltipPr
 
         const currentItem = displayValuesFor(this.props, moreProps) ?? last(fullData);
 
-        const config = chartConfig;
+        const config = chartConfig!;
 
         const origin = functor(originProp);
         const [x, y] = origin(width, height);

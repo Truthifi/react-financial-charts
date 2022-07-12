@@ -11,50 +11,49 @@ const postCanvasDraw = (ctx: CanvasRenderingContext2D) => {
 
 export const GenericChartComponent = React.memo(
     React.forwardRef((props: GenericComponentProps, ref: ForwardedRef<GenericComponentRef>) => {
+        const { clip = true, edgeClip = false } = props;
         const context = useContext(ChartContext);
-        const { chartConfig } = context;
+        const { chartId, chartConfig } = context;
         const getMoreProps = useCallback(
             (moreProps: MoreProps) => {
-                // const result =
-                // if (isDefined(moreProps.chartConfig)) {
-                //     const {
-                //         origin: [ox, oy],
-                //     } = moreProps.chartConfig;
-                //     if (isDefined(moreProps.mouseXY)) {
-                //         const {
-                //             mouseXY: [x, y],
-                //         } = moreProps;
-                //         moreProps.mouseXY = [x - ox, y - oy];
-                //     }
-                //     if (isDefined(moreProps.startPos)) {
-                //         const {
-                //             startPos: [x, y],
-                //         } = moreProps;
-                //         moreProps.startPos = [x - ox, y - oy];
-                //     }
-                // }
-                // if (isDefined(moreProps.mouseXY)) {
-                //     const {
-                //         mouseXY: [x, y],
-                //     } = moreProps;
-                //     moreProps.mouseXY = [x - ox, y - oy];
-                // }
-                return {
+                const result: Partial<MoreProps> = {
                     chartConfig,
+                    chartId,
                 };
+                result.chartConfig = moreProps.chartConfigs.find((each) => each.id === chartId);
+                if (isDefined(moreProps.chartConfig)) {
+                    const {
+                        origin: [ox, oy],
+                    } = moreProps.chartConfig;
+                    if (isDefined(moreProps.mouseXY)) {
+                        const {
+                            mouseXY: [x, y],
+                        } = moreProps;
+                        result.mouseXY = [x - ox, y - oy];
+                    }
+                    if (isDefined(moreProps.startPos)) {
+                        const {
+                            startPos: [x, y],
+                        } = moreProps;
+                        result.startPos = [x - ox, y - oy];
+                    }
+                }
+                return result;
             },
-            [chartConfig],
+            [chartId],
         );
         const preCanvasDraw = useCallback(
-            (ctx: CanvasRenderingContext2D) => {
+            (ctx: CanvasRenderingContext2D, moreProps: MoreProps) => {
+                const chartConfig = moreProps.chartConfigs.find((each) => each.id === chartId);
+                if (!chartConfig) {
+                    return;
+                }
                 ctx.save();
                 const { margin, ratio } = context;
                 const { width, height, origin } = chartConfig;
 
                 const canvasOriginX = 0.5 * ratio + origin[0] + margin.left;
                 const canvasOriginY = 0.5 * ratio + origin[1] + margin.top;
-
-                const { clip, edgeClip } = props;
 
                 ctx.setTransform(1, 0, 0, 1, 0, 0);
                 ctx.scale(ratio, ratio);
@@ -72,7 +71,7 @@ export const GenericChartComponent = React.memo(
                     ctx.clip();
                 }
             },
-            [context.margin, context.ratio, props.clip, props.edgeClip, chartConfig],
+            [context.margin, context.ratio, clip, edgeClip, chartConfig],
         );
 
         const shouldTypeProceed = useCallback((type: string, moreProps: MoreProps) => {
@@ -113,6 +112,8 @@ export const GenericChartComponent = React.memo(
         return (
             <GenericComponent
                 {...props}
+                clip={clip}
+                edgeClip={edgeClip}
                 ref={ref}
                 preCanvasDraw={preCanvasDraw}
                 postCanvasDraw={postCanvasDraw}
