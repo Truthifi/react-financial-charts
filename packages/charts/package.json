@@ -1,5 +1,5 @@
 {
-  "name": "react-financial-charts",
+  "name": "@truthifi/react-financial-charts",
   "version": "1.4.0",
   "description": "React charts specific to finance.",
   "type": "module",
