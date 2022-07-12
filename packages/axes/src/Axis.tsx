@@ -1,7 +1,8 @@
 import {
     first,
-    getAxisCanvas,
     GenericChartComponent,
+    GenericComponentRef,
+    getAxisCanvas,
     getStrokeDasharrayCanvas,
     last,
     strokeDashTypes,
@@ -64,7 +65,7 @@ export class Axis extends React.Component<AxisProps> {
         zoomCursorClassName: "",
     };
 
-    private readonly chartRef = React.createRef<GenericChartComponent>();
+    private readonly chartRef = React.createRef<GenericComponentRef>();
 
     public render() {
         const {
