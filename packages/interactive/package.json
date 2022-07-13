@@ -1,6 +1,6 @@
 {
   "name": "@truthifi/react-financial-charts-interactive",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "Interactive features for react-financial-charts",
   "publishConfig": {
     "access": "public"

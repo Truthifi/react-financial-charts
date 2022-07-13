@@ -1,6 +1,6 @@
 {
   "name": "@truthifi/react-financial-charts-axes",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "Axes for react-financial-charts",
   "publishConfig": {
     "access": "public"

@@ -1,6 +1,6 @@
 {
   "name": "@truthifi/react-financial-charts-scales",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "Scales for react-financial-charts",
   "publishConfig": {
     "access": "public"

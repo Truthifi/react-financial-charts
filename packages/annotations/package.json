@@ -1,6 +1,6 @@
 {
   "name": "@truthifi/react-financial-charts-annotations",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "Annotations for react-financial-charts",
   "publishConfig": {
     "access": "public"
