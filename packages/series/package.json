@@ -1,6 +1,6 @@
 {
   "name": "@truthifi/react-financial-charts-series",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Series for react-financial-charts",
   "publishConfig": {
     "access": "public"
