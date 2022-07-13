@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.3](https://github.com/reactivemarkets/react-financial-charts/compare/v1.4.2...v1.4.3) (2022-07-13)
+
+
+### Bug Fixes
+
+* Data updates cause chart to immediately render with correct scale and data ([f586dda](https://github.com/reactivemarkets/react-financial-charts/commit/f586ddab955e28b277686581cac70ea39c20933f))
+
+
+
+
+
 ## [1.4.2](https://github.com/reactivemarkets/react-financial-charts/compare/v1.4.1...v1.4.2) (2022-07-13)
 
 

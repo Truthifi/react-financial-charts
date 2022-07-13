@@ -1,6 +1,6 @@
 {
   "name": "@truthifi/react-financial-charts",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "React charts specific to finance.",
   "publishConfig": {
     "access": "public"
